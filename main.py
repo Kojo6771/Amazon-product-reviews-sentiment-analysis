@@ -12,4 +12,6 @@ nltk.download('punkt')
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 
-
+#importing dataset
+data = pd.read_csv("Amazon-Product-Reviews-Sentiment-Analysis-in-Python-Dataset.csv")
+data.head()
