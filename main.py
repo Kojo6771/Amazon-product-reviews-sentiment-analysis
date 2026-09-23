@@ -12,6 +12,10 @@ nltk.download('punkt')
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
 #importing dataset
 data = pd.read_csv("Amazon-Product-Reviews-Sentiment-Analysis-in-Python-Dataset.csv")
 data.head()
@@ -52,3 +56,14 @@ plt.figure(figsize=(15,10))
 plt.imshow(wordCloud_positive.generate(consolidated_positive),interpolation='bilinear')
 plt.axis('off')
 plt.show()
+
+# Converting text data into numerical features using TF-IDF Vectorizer
+cv=TfidfVectorizer(max_features=2500)
+x = cv.fit_transform(data['Review']).toarray()
+y = data['Sentiment']
+
+# Splitting the dataset into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=42)
+
+
+
