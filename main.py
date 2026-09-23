@@ -12,9 +12,13 @@ nltk.download('punkt')
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 
+# Sklearn setup for model training and evaluation
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
+
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix
 
 #importing dataset
 data = pd.read_csv("Amazon-Product-Reviews-Sentiment-Analysis-in-Python-Dataset.csv")
@@ -65,5 +69,16 @@ y = data['Sentiment']
 # Splitting the dataset into training and testing sets
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=42)
 
+#Training the Logistic Regression model
+model = LogisticRegression()
+model.fit(x_train, y_train)
+y_pred = model.predict(x_test)
+print(f"Accuracy: {accuracy_score(y_test, y_pred)}")
 
 
+# Confusion matrix for the model
+cm = confusion_matrix(y_test, y_pred)
+cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = cm, display_labels = [False, True])
+
+cm_display.plot()
+plt.show()
