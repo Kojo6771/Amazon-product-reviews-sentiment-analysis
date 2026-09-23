@@ -1,0 +1,76 @@
+# Amazon Product Reviews Sentiment Analysis
+
+This project classifies Amazon product reviews as positive or negative using natural language processing and logistic regression.
+
+## What the project does
+
+The script:
+
+1. Loads the Amazon review dataset from the CSV file.
+2. Removes rows with missing values.
+3. Converts the original rating labels into two classes:
+	- Ratings 1-3: negative (`0`)
+	- Ratings 4-5: positive (`1`)
+4. Removes English stopwords from each review.
+5. Generates word clouds for negative and positive reviews.
+6. Converts review text into TF-IDF features.
+7. Splits the data into training and test sets.
+8. Trains a logistic regression classifier.
+9. Prints the model accuracy and displays a confusion matrix.
+
+## Project files
+
+| File | Description |
+| --- | --- |
+| `main.py` | Data preparation, visualization, model training, and evaluation script |
+| `Amazon-Product-Reviews-Sentiment-Analysis-in-Python-Dataset.csv` | Amazon product review dataset |
+| `requirements.txt` | Python dependencies |
+
+## Requirements
+
+- Python 3.10 or newer
+- Internet access on the first run so NLTK can download `punkt` and `stopwords`
+
+## Installation
+
+Create and activate a virtual environment, then install the dependencies:
+
+```bash
+python -m venv .venv
+```
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+macOS/Linux:
+
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Usage
+
+Keep the CSV file in the same directory as `main.py`, activate the virtual environment, and run:
+
+```bash
+python main.py
+```
+
+The program prints the classification accuracy and opens plots for the negative-review word cloud, positive-review word cloud, and confusion matrix. Close each plot window to continue to the next one.
+
+## Model details
+
+- Feature extraction: `TfidfVectorizer` with a maximum of 2,500 features
+- Classifier: `LogisticRegression`
+- Test set size: 25%
+- Train/test split seed: `42`
+
+## Notes
+
+- The CSV is expected to contain `Review` and `Sentiment` columns.
+- The script currently evaluates the model and displays results; it does not save a trained model or generated plots to disk.
